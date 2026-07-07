@@ -3,7 +3,7 @@
  * Handles the JWT token (stored in localStorage), JSON encoding/decoding, and
  * consistent error surfacing.
  */
-const API_BASE_URL = window.KANA_API_BASE_URL || "http://localhost:8000";
+const API_BASE_URL = window.KANA_API_BASE_URL || "https://japanese-kana-trainer.onrender.com";
 
 const TOKEN_KEY = "kana_trainer_token";
 
