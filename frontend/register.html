@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register — Japanese Kana Trainer</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+<div id="navbar-mount"></div>
+
+<main class="page-body">
+  <div class="container">
+    <div class="auth-shell card">
+      <h2 class="text-center">Create your account</h2>
+      <p class="text-center text-muted mb-24">Free forever. Save your progress across devices.</p>
+
+      <div id="form-alert" class="alert alert-error hidden"></div>
+
+      <form id="register-form" novalidate>
+        <div class="field">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" minlength="3" maxlength="50" required autocomplete="username">
+          <div class="field-hint">At least 3 characters, no spaces.</div>
+        </div>
+        <div class="field">
+          <label for="display_name">Display name (optional)</label>
+          <input type="text" id="display_name" name="display_name" autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" minlength="6" required autocomplete="new-password">
+          <div class="field-hint">At least 6 characters.</div>
+        </div>
+        <button type="submit" class="btn btn-seal btn-block btn-lg" id="submit-btn">Create Account</button>
+      </form>
+
+      <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+    </div>
+  </div>
+</main>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script>
+  if (Auth.isLoggedIn()) window.location.href = "dashboard.html";
+
+  document.getElementById("register-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const alertBox = document.getElementById("form-alert");
+    const btn = document.getElementById("submit-btn");
+    alertBox.classList.add("hidden");
+    btn.disabled = true;
+    btn.textContent = "Creating account…";
+    try {
+      const username = document.getElementById("username").value.trim();
+      const display_name = document.getElementById("display_name").value.trim() || undefined;
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const { access_token } = await Api.register(username, email, password, display_name);
+      Auth.setToken(access_token);
+      window.location.href = "dashboard.html";
+    } catch (err) {
+      alertBox.textContent = err.message || "Registration failed.";
+      alertBox.classList.remove("hidden");
+      btn.disabled = false;
+      btn.textContent = "Create Account";
+    }
+  });
+</script>
+</body>
+</html>

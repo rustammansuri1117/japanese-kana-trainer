@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japanese Kana Trainer — Learn Hiragana & Katakana</title>
+<meta name="description" content="Learn Hiragana and Katakana with flashcards, adaptive quizzes, and spaced repetition.">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+<div id="navbar-mount"></div>
+
+<main>
+  <!-- HERO -->
+  <section class="hero genkou-bg">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">Hiragana ・ Katakana ・ (Kanji, coming soon)</p>
+        <h1>Learn to read <span class="ink-highlight">Japanese kana</span>, one stamp at a time.</h1>
+        <p class="hero-sub">92 characters. Flashcards, adaptive quizzes, and spaced repetition that remembers exactly what trips you up — and stamps every right answer like a teacher's hanko seal.</p>
+        <div class="hero-ctas">
+          <a href="hiragana.html" class="btn btn-seal btn-lg">Learn Hiragana</a>
+          <a href="katakana.html" class="btn btn-outline btn-lg">Learn Katakana</a>
+        </div>
+        <div class="hero-quicklinks">
+          <a href="flashcards.html">Flashcards →</a>
+          <a href="quiz.html">Quiz →</a>
+          <a href="progress.html">Progress →</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-cell-grid">
+          <div class="genkou-cell big-char">あ</div>
+          <div class="genkou-cell big-char alt">ア</div>
+          <div class="genkou-cell big-char">か</div>
+          <div class="genkou-cell big-char alt">カ</div>
+        </div>
+        <div class="hanko-mark hero-hanko">合格</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="container section">
+    <h2 class="text-center">Everything you need to actually remember them</h2>
+    <p class="text-center text-muted section-sub">Not just recognition drills — a full loop of learning, testing, and review.</p>
+    <div class="grid-4 features-grid">
+      <div class="card feature-card">
+        <div class="feature-icon">字</div>
+        <h3>Full Character Library</h3>
+        <p>Every lesson covers stroke order, stroke count, writing tips, an example word, and a memory tip.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="feature-icon">🔁</div>
+        <h3>Spaced Repetition</h3>
+        <p>Characters you miss come back sooner. Characters you've mastered fade into the background.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="feature-icon">⏱</div>
+        <h3>Six Quiz Modes</h3>
+        <p>Character → Romaji, Romaji → Character, Multiple Choice, Timed, Mixed Kana, and Mistake Review.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="feature-icon">📈</div>
+        <h3>Real Progress Tracking</h3>
+        <p>Accuracy, streaks, response time, and daily/weekly/monthly charts — all in one dashboard.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHARACTER PREVIEW -->
+  <section class="container section">
+    <div class="flex justify-between items-center mb-16">
+      <h2>A peek at the library</h2>
+      <a href="hiragana.html" class="btn btn-ghost btn-sm">See all Hiragana →</a>
+    </div>
+    <div id="home-char-preview" class="char-grid"></div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <div class="container text-center">
+      <h2>Your first stamp is one click away.</h2>
+      <p class="text-muted">Create a free account to save your progress and pick up where you left off.</p>
+      <div class="hero-ctas justify-center">
+        <a href="register.html" class="btn btn-seal btn-lg">Create free account</a>
+        <a href="login.html" class="btn btn-outline btn-lg">I already have one</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container text-center text-muted">
+    <p>Japanese Kana Trainer — built for learners, by learners. Kanji support coming soon.</p>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script>
+  Api.listHiragana().then(chars => {
+    const mount = document.getElementById("home-char-preview");
+    mount.innerHTML = chars.slice(0, 12).map(c => `
+      <a href="hiragana.html#${c.id}" class="char-tile" style="text-decoration:none;">
+        <span class="char-big">${c.character}</span>
+        <span class="char-romaji">${c.romaji}</span>
+      </a>
+    `).join("");
+  }).catch(() => {
+    document.getElementById("home-char-preview").innerHTML = `<p class="text-muted">Couldn't load the character preview — make sure the backend server is running.</p>`;
+  });
+</script>
+</body>
+</html>

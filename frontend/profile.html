@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile — Japanese Kana Trainer</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+<div id="navbar-mount"></div>
+
+<main class="page-body">
+  <div class="container">
+    <div class="profile-header">
+      <div class="profile-avatar" id="profile-initial">?</div>
+      <div>
+        <h2 style="margin-bottom:0;" id="profile-name-header">—</h2>
+        <p class="text-muted" style="margin:0;" id="profile-username-header">@—</p>
+      </div>
+    </div>
+
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="tab-profile" onclick="showTab('tab-profile')">Profile</button>
+      <button class="tab-btn" data-tab="tab-password" onclick="showTab('tab-password')">Password</button>
+      <button class="tab-btn" data-tab="tab-preferences" onclick="showTab('tab-preferences')">Preferences</button>
+    </div>
+
+    <div id="tab-profile" class="tab-panel card" style="max-width:480px;">
+      <div id="profile-alert" class="alert hidden"></div>
+      <form id="profile-form">
+        <div class="field">
+          <label for="display_name">Display name</label>
+          <input type="text" id="display_name" name="display_name">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="field">
+          <label for="theme_preference">Theme</label>
+          <select id="theme_preference" name="theme_preference">
+            <option value="light">Light (Washi paper)</option>
+            <option value="dark">Dark (Sumi ink)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </form>
+    </div>
+
+    <div id="tab-password" class="tab-panel card hidden" style="max-width:480px;">
+      <div id="password-alert" class="alert hidden"></div>
+      <form id="password-form">
+        <div class="field">
+          <label for="current_password">Current password</label>
+          <input type="password" id="current_password" name="current_password" required autocomplete="current-password">
+        </div>
+        <div class="field">
+          <label for="new_password">New password</label>
+          <input type="password" id="new_password" name="new_password" minlength="6" required autocomplete="new-password">
+        </div>
+        <button type="submit" class="btn btn-primary">Change password</button>
+      </form>
+    </div>
+
+    <div id="tab-preferences" class="tab-panel card hidden" style="max-width:480px;">
+      <div class="field flex items-center justify-between" style="flex-direction:row;">
+        <label for="sound-toggle" style="margin:0;">Sound effects</label>
+        <input type="checkbox" id="sound-toggle" style="width:auto;">
+      </div>
+      <p class="text-muted" style="font-size:0.85rem;">Correct/incorrect chimes and level-up fanfare during quizzes.</p>
+      <hr class="divider">
+      <p class="text-muted" style="font-size:0.85rem;">Keyboard shortcuts: <span class="mono">Space</span> flips flashcards, <span class="mono">←/→</span> navigate, <span class="mono">S</span> shuffles.</p>
+    </div>
+  </div>
+</main>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script src="js/profile.js"></script>
+<script>
+  requireAuth();
+  initProfilePage();
+</script>
+</body>
+</html>

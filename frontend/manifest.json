@@ -1,0 +1,16 @@
+{
+  "name": "Japanese Kana Trainer",
+  "short_name": "Kana Trainer",
+  "description": "Learn Hiragana and Katakana with flashcards, quizzes, and spaced repetition.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#F1ECDC",
+  "theme_color": "#1D3354",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23BE3A34'/%3E%3Ctext x='50' y='66' font-size='48' text-anchor='middle' fill='white' font-family='serif'%3E%E4%BB%AE%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Japanese Kana Trainer</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+<div id="navbar-mount"></div>
+
+<main class="page-body">
+  <div class="container">
+    <h1>Welcome back, <span id="welcome-name">—</span></h1>
+    <div class="flex gap-12 mb-24">
+      <span class="pill pill-indigo" id="dash-level">Level —</span>
+      <span class="pill pill-seal" id="dash-streak">— day streak</span>
+    </div>
+
+    <div class="card mb-24">
+      <div class="flex justify-between items-center">
+        <strong>Experience</strong>
+        <span class="mono text-muted" id="xp-label"></span>
+      </div>
+      <div class="xp-bar-wrap progress-bar"><div class="progress-bar-fill gold" id="xp-bar-fill" style="width:0%;"></div></div>
+    </div>
+
+    <div class="dashboard-grid">
+      <div>
+        <div class="card daily-challenge-card mb-24">
+          <h3>🎯 Daily Challenge</h3>
+          <p id="daily-challenge-desc">Loading today's challenge…</p>
+          <a href="quiz.html" id="daily-challenge-link" class="btn btn-seal">Start challenge →</a>
+        </div>
+
+        <div class="grid-3 mb-24">
+          <div class="card stat-tile"><div class="stat-value" id="dash-accuracy">—</div><div class="stat-label">Accuracy</div></div>
+          <div class="card stat-tile"><div class="stat-value" id="dash-mastered">—</div><div class="stat-label">Mastered</div></div>
+          <div class="card stat-tile"><div class="stat-value" id="dash-learned">—</div><div class="stat-label">Learned</div></div>
+        </div>
+
+        <div class="card">
+          <h3>Recent mistakes</h3>
+          <div id="dash-mistakes"><p class="text-muted">Loading…</p></div>
+          <a href="quiz.html" class="btn btn-outline btn-sm mt-16">Review mistakes →</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="card mb-24">
+          <h3>Quick links</h3>
+          <div class="flex-col gap-8">
+            <a href="hiragana.html" class="btn btn-ghost btn-block">Hiragana Table</a>
+            <a href="katakana.html" class="btn btn-ghost btn-block">Katakana Table</a>
+            <a href="flashcards.html" class="btn btn-ghost btn-block">Flashcards</a>
+            <a href="progress.html" class="btn btn-ghost btn-block">Full Progress</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Achievements</h3>
+          <div class="flex-col gap-8" id="dash-achievements"><p class="text-muted">Loading…</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script src="js/dashboard.js"></script>
+<script>
+  requireAuth();
+  initDashboard();
+</script>
+</body>
+</html>

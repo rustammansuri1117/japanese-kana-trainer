@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flashcards — Japanese Kana Trainer</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+<div id="navbar-mount"></div>
+
+<main class="page-body">
+  <div class="container">
+    <h1>Flashcards</h1>
+    <p class="text-muted mb-24">Click or press <span class="mono">Space</span> to flip. <span class="mono">←/→</span> to move, <span class="mono">S</span> to shuffle.</p>
+
+    <div class="flex justify-between items-center mb-24" style="max-width:320px; margin:0 auto 24px;">
+      <select id="script-select" class="field" style="padding:10px 14px; border-radius:2px; border:1.5px solid var(--paper-line); background:var(--paper-raised); color:var(--ink);">
+        <option value="hiragana">Hiragana</option>
+        <option value="katakana">Katakana</option>
+        <option value="mixed">Mixed</option>
+      </select>
+    </div>
+
+    <div id="flashcard-stage" class="flashcard-stage hidden">
+      <div class="flashcard-progress-label" id="fc-progress-label">Card 1 of 46</div>
+      <div class="progress-bar" style="max-width:320px; margin-bottom:24px;"><div class="progress-bar-fill seal" id="fc-progress-bar" style="width:0%;"></div></div>
+
+      <div class="flashcard-scene">
+        <div class="flashcard" id="flashcard" onclick="flipCard()">
+          <div class="flashcard-face front">
+            <div class="big-front-char" id="fc-front-char">あ</div>
+            <div class="hint-text">Click to reveal</div>
+          </div>
+          <div class="flashcard-face back">
+            <h2 id="fc-back-romaji" style="margin-bottom:4px;">a</h2>
+            <p id="fc-back-example" class="text-muted" style="margin-bottom:12px;"></p>
+            <p id="fc-back-tip" style="font-size:0.9rem;"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flashcard-controls">
+        <button class="btn-icon" onclick="prevCard()" aria-label="Previous card">←</button>
+        <button class="btn-icon" onclick="shuffleDeck()" aria-label="Shuffle deck">🔀</button>
+        <button class="btn-icon" onclick="nextCard()" aria-label="Next card">→</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script src="js/flashcards.js"></script>
+<script>
+  const scriptSelect = document.getElementById("script-select");
+  const params = new URLSearchParams(location.search);
+  if (params.get("script")) scriptSelect.value = params.get("script");
+
+  window.KANA_SCRIPT = scriptSelect.value;
+  initFlashcards(scriptSelect.value);
+
+  scriptSelect.addEventListener("change", async () => {
+    await logFlashcardSession();
+    seenCount = 0;
+    window.KANA_SCRIPT = scriptSelect.value;
+    initFlashcards(scriptSelect.value);
+  });
+</script>
+</body>
+</html>

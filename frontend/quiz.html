@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz — Japanese Kana Trainer</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+<div id="navbar-mount"></div>
+
+<main class="page-body">
+  <div class="container">
+
+    <div id="quiz-setup">
+      <h1>Quiz</h1>
+      <p class="text-muted mb-24">Choose a script and a quiz mode. The backend adapts questions to what you've missed and what you haven't mastered yet.</p>
+
+      <h3>Script</h3>
+      <div class="quiz-setup-grid mb-24">
+        <div class="option-card selected" data-script="hiragana">
+          <div class="opt-title">Hiragana</div>
+          <div class="opt-sub">ひらがな</div>
+        </div>
+        <div class="option-card" data-script="katakana">
+          <div class="opt-title">Katakana</div>
+          <div class="opt-sub">カタカナ</div>
+        </div>
+        <div class="option-card" data-script="mixed">
+          <div class="opt-title">Mixed Kana</div>
+          <div class="opt-sub">Both scripts</div>
+        </div>
+      </div>
+
+      <h3>Quiz type</h3>
+      <div class="quiz-setup-grid mb-16">
+        <div class="option-card selected" data-quiztype="char_to_romaji">
+          <div class="opt-title">Character → Romaji</div>
+          <div class="opt-sub">Type the reading</div>
+        </div>
+        <div class="option-card" data-quiztype="romaji_to_char">
+          <div class="opt-title">Romaji → Character</div>
+          <div class="opt-sub">Multiple choice</div>
+        </div>
+        <div class="option-card" data-quiztype="multiple_choice">
+          <div class="opt-title">Multiple Choice</div>
+          <div class="opt-sub">Pick the reading</div>
+        </div>
+        <div class="option-card" data-quiztype="timed">
+          <div class="opt-title">Timed Quiz</div>
+          <div class="opt-sub">Beat the clock</div>
+        </div>
+        <div class="option-card" data-quiztype="mixed">
+          <div class="opt-title">Mixed Modes</div>
+          <div class="opt-sub">Surprise me</div>
+        </div>
+        <div class="option-card" data-quiztype="review_mistakes">
+          <div class="opt-title">Review Mistakes</div>
+          <div class="opt-sub">Only past misses</div>
+        </div>
+      </div>
+
+      <div id="timer-select-wrap" class="field hidden" style="max-width:220px;">
+        <label for="timer-select">Timer</label>
+        <select id="timer-select">
+          <option value="5">5 seconds</option>
+          <option value="10" selected>10 seconds</option>
+          <option value="15">15 seconds</option>
+          <option value="unlimited">Unlimited</option>
+        </select>
+      </div>
+
+      <button class="btn btn-seal btn-lg mt-16" id="start-quiz-btn">Start Quiz</button>
+    </div>
+
+    <div id="quiz-stage" class="quiz-stage hidden">
+      <div class="quiz-progress-row">
+        <span id="quiz-mode-label">hiragana · char to romaji</span>
+        <span id="quiz-timer" class="quiz-timer hidden"></span>
+        <span id="quiz-session-score">0 / 0 correct</span>
+      </div>
+
+      <div class="card quiz-prompt-card" id="quiz-prompt-card"></div>
+      <div id="quiz-answer-area"></div>
+
+      <button class="btn btn-ghost mt-24" onclick="endQuizSession()">End Session</button>
+    </div>
+
+  </div>
+</main>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script src="js/quiz.js"></script>
+<script>
+  requireAuth();
+  initQuizSetup();
+</script>
+</body>
+</html>

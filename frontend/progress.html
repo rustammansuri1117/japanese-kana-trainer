@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progress — Japanese Kana Trainer</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+<div id="navbar-mount"></div>
+
+<main class="page-body">
+  <div class="container">
+    <div class="flex justify-between items-center mb-16" style="flex-wrap:wrap; gap:12px;">
+      <h1 style="margin-bottom:0;">Your Progress</h1>
+      <div class="flex gap-8">
+        <button class="btn btn-ghost btn-sm" onclick="exportProgressFile()">Export progress</button>
+        <label class="btn btn-ghost btn-sm" style="cursor:pointer;">
+          Import progress
+          <input type="file" accept=".json" style="display:none;" onchange="importProgressFile(this)">
+        </label>
+      </div>
+    </div>
+
+    <div class="grid-4 mb-32" id="stat-tiles">
+      <div class="card stat-tile skeleton" style="height:90px;"></div>
+      <div class="card stat-tile skeleton" style="height:90px;"></div>
+      <div class="card stat-tile skeleton" style="height:90px;"></div>
+      <div class="card stat-tile skeleton" style="height:90px;"></div>
+    </div>
+
+    <div class="card mb-32">
+      <h3>Last 7 days</h3>
+      <div id="daily-chart"><div class="skeleton" style="height:180px;"></div></div>
+    </div>
+
+    <h2>Mistake Review</h2>
+    <p class="text-muted mb-16">Characters you've missed recently. Head to the Quiz page and choose "Review Mistakes" to drill these specifically.</p>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Hiragana mistakes</h3>
+        <div id="mistakes-hiragana"><p class="text-muted">Loading…</p></div>
+      </div>
+      <div class="card">
+        <h3>Katakana mistakes</h3>
+        <div id="mistakes-katakana"><p class="text-muted">Loading…</p></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script src="js/progress.js"></script>
+<script>
+  requireAuth();
+  initProgressPage();
+</script>
+</body>
+</html>
